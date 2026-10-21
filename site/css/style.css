@@ -612,3 +612,8 @@ select.mini{padding:5px 8px;font-size:13px;border-radius:8px}
 .landing .lphoto,.phead .pphoto{flex:none;width:100%;height:clamp(240px,42vw,560px);aspect-ratio:auto}
 .phead .pphoto{height:calc(clamp(240px,42vw,560px) / 1.2);margin-top:calc(clamp(28px,5vw,56px) / 1.2)}
 @media (min-width:900px){.phead .pphoto{width:calc((min(max(960px,60vw),100vw) - 2 * var(--gutter)) / 1.2)}}
+
+.thumb{display:inline-flex;align-items:center;margin-top:6px;padding:4px 12px;border:1px solid var(--line);border-radius:999px;background:transparent;cursor:pointer}
+.thumb img{display:block;width:24px;height:24px;opacity:.55}
+.thumb.on{border-color:var(--accent);background:var(--accent)}
+.thumb.on img{opacity:1;filter:invert(1)}

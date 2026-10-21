@@ -45,7 +45,7 @@ function homeView() {
     el("section", { class: "lsec", id: "cityList" },
       el("h2", { class: "lh" }, t("hl_by_city")),
       el("p", { class: "note", style: "margin:0 0 10px" }, t("hl_by_city_sub")),
-      el("div", { class: "grid" }, ...cities.map((c) => cityCard(c, `#/match/${c.id}`)))),
+      el("div", { class: "grid" }, ...cities.map((c) => cityCard(c)))),
     // 4) 안전
     el("section", { class: "lsec" },
       el("h2", { class: "lh" }, t("hl_safe")),
@@ -94,8 +94,24 @@ function requestBox() {
       el("div", { class: "reqhead" }, el("b", {}, label), el("span", {}, `${pctOf(n)}%`)),
       el("div", { class: "meter", role: "progressbar", "aria-valuemin": "0", "aria-valuemax": "100", "aria-valuenow": String(pctOf(n)), "aria-label": label },
         el("i", { style: `width:${pctOf(n)}%` })),
-      el("div", { class: "note" }, t("req_count", { n, t: CITY_OPEN_THRESHOLD, p: pctOf(n) })));
+      el("div", { class: "note" }, t("req_count", { n, t: CITY_OPEN_THRESHOLD, p: pctOf(n) })),
+      thumbBtn(key, label));
   };
+  // 따봉: 아이디당 도시별 1번만 (투표 기록은 로그인한 아이디별로 저장)
+  const votesKey = () => `thumbVotes_${currentUserId()}`;
+  function thumbBtn(key, label) {
+    const voted = !!currentUserId() && store.get(votesKey(), []).includes(key);
+    return el("button", { class: "thumb" + (voted ? " on" : ""), type: "button", "aria-pressed": String(voted), "aria-label": label,
+      onclick: () => {
+        if (!currentUserId()) { promptLogin(t("gate_request")); return; }
+        const done = store.get(votesKey(), []);
+        const had = done.includes(key);   // 다시 누르면 투표 취소
+        requests[key] = Math.max(0, (requests[key] ?? 0) + (had ? -1 : 1));
+        store.set("cityRequests", requests);
+        store.set(votesKey(), had ? done.filter((k) => k !== key) : [...done, key]);
+        showMeter();
+      } }, el("img", { src: "img/thumb.png", alt: "", width: "24", height: "24" }));
+  }
   // 예시 여행지(+내가 요청한 곳)의 달성률 목록
   function showMeter(cityName) {
     const keys = [...new Set([...Object.keys(SEED_REQUESTS), ...(cityName ? [cityName] : []), ...mine])];
