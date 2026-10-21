@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Roamly">
+  <rect width="64" height="64" rx="16" fill="#1d5c6b"/>
+  <path d="M32 9C23 9 16 16 16 25C16 36 32 49 32 49S48 36 48 25C48 16 41 9 32 9Z" fill="#fff"/>
+  <circle cx="32" cy="25" r="6" fill="#1d5c6b"/>
+  <path d="M12 56C20 49 26 59 34 53S46 50 52 55" fill="none" stroke="#a9d8e0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

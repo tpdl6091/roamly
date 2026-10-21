@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" role="img" aria-label="laia_r">
+<defs><clipPath id="c"><circle cx="80" cy="80" r="80"/></clipPath></defs>
+<g clip-path="url(#c)">
+<rect width="160" height="160" fill="#e1edf3"/>
+<path d="M44 76 C38 100 40 118 50 124 L110 124 C120 118 122 100 116 76 Z" fill="#231a15"/>
+<path d="M14 164 C18 134 50 124 80 124 C110 124 142 134 146 164 Z" fill="#5f8a8b"/>
+<path d="M66 124 L80 142 L94 124 Z" fill="#436e6f" opacity=".55"/>
+<rect x="68" y="102" width="24" height="26" rx="8" fill="#f1cfb2"/>
+<rect x="68" y="108" width="24" height="10" fill="#dbb99c" opacity=".35"/>
+<ellipse cx="46" cy="82" rx="5.5" ry="8" fill="#f1cfb2"/><ellipse cx="114" cy="82" rx="5.5" ry="8" fill="#f1cfb2"/>
+<ellipse cx="80" cy="80" rx="34" ry="40" fill="#f1cfb2"/>
+
+<path d="M44 72 C42 40 62 28 80 28 C98 28 118 40 116 72 C108 54 98 48 80 48 C62 48 52 54 44 72 Z" fill="#231a15"/>
+<path d="M57 68 Q65 63 73 67" stroke="#231a15" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M87 67 Q95 63 103 68" stroke="#231a15" stroke-width="3" fill="none" stroke-linecap="round"/>
+<ellipse cx="65" cy="78" rx="4.2" ry="4.8" fill="#2a2320"/><ellipse cx="95" cy="78" rx="4.2" ry="4.8" fill="#2a2320"/>
+<circle cx="66.4" cy="76.4" r="1.4" fill="#fff"/><circle cx="96.4" cy="76.4" r="1.4" fill="#fff"/>
+<circle cx="65" cy="78" r="9.5" fill="none" stroke="#3a3a3a" stroke-width="2"/><circle cx="95" cy="78" r="9.5" fill="none" stroke="#3a3a3a" stroke-width="2"/><path d="M74.5 78 H85.5" stroke="#3a3a3a" stroke-width="2"/>
+
+<path d="M80 80 C78 88 77 91 80 92 C83 92 82 88 80 80" stroke="#dbb99c" stroke-width="2" fill="none" stroke-linecap="round"/>
+<path d="M67 99 Q80 110 93 99" stroke="#a8514b" stroke-width="3" fill="none" stroke-linecap="round"/>
+<ellipse cx="56" cy="92" rx="6" ry="3.5" fill="#e98a8a" opacity=".28"/><ellipse cx="104" cy="92" rx="6" ry="3.5" fill="#e98a8a" opacity=".28"/>
+</g></svg>

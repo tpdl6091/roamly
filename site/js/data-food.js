@@ -1,0 +1,81 @@
+// 해외 식품 예시 데이터. 가상의 제품이며 성분·알레르기 정보는 실제가 아니다(화면에도 항상 안내한다).
+// taste = 평균 맛 프로필(0~5). reviews[].feel = 리뷰어가 느낀 맛(0~5)으로, 내 입맛과 비교해 비슷한 리뷰를 먼저 보여준다.
+export const PRODUCTS = [
+  { id: "jp-potato", country: "jp", cat: "snack", price: { amount: 200, currency: "JPY" }, taste: { sweet: 0, salty: 3, spicy: 0 },
+    rating: 4.3, rebuy: 82, gift: 3, pop: 5, allergens: ["soy"],
+    name: { ko: "얇은 감자칩 소금맛", en: "Thin potato chips (salt)", ja: "うす切りポテトチップス しお味" },
+    reviews: [
+      { role: "local", taste: 4.5, texture: 4.5, rebuy: true, feel: { sweet: 0, salty: 2, spicy: 0 }, bought: "2026-09",
+        text: { ko: "짠맛이 약해서 아이도 잘 먹어요. 바삭함이 오래 가요.", en: "Not too salty, even kids eat it. Stays crispy for a long time.", ja: "塩気が控えめで子どもも食べやすいです。サクサク感が長持ちします。" } },
+      { role: "traveler", taste: 4, texture: 4, rebuy: true, feel: { sweet: 0, salty: 4, spicy: 0 }, bought: "2026-08",
+        text: { ko: "편의점에서 쉽게 살 수 있어서 선물용 간식으로 샀어요.", en: "Easy to find at convenience stores, so I bought it as a small gift.", ja: "コンビニで買えるので、お土産の軽いお菓子にしました。" } },
+    ],
+    qa: [{ q: { ko: "한국에 반입하는 데 제한이 있나요?", en: "Are there any limits on bringing it into Korea?", ja: "韓国への持ち込みに制限はありますか？" },
+      a: { ko: "개인이 먹을 소량의 과자는 보통 문제가 없다고 들었어요. 정확한 기준은 세관 안내를 확인해 주세요.", en: "Small amounts of snacks for personal use are usually fine, as far as I know. Please check customs rules for exact limits.", ja: "個人で食べる少量のお菓子は通常問題ないと聞きます。正確な基準は税関の案内をご確認ください。" } }] },
+  { id: "jp-matcha", country: "jp", cat: "sweet", price: { amount: 450, currency: "JPY" }, taste: { sweet: 4, salty: 0, spicy: 0 },
+    rating: 4.6, rebuy: 88, gift: 5, pop: 5, allergens: ["wheat", "milk"],
+    name: { ko: "말차 쿠키 상자", en: "Matcha cookie box", ja: "抹茶クッキー詰め合わせ" },
+    reviews: [
+      { role: "local", taste: 4.5, texture: 4, rebuy: true, feel: { sweet: 4, salty: 0, spicy: 0 }, bought: "2026-09",
+        text: { ko: "말차 향이 진하고 달아요. 개별 포장이라 나눠 주기 좋아요.", en: "Strong matcha aroma and quite sweet. Individually wrapped, great for sharing.", ja: "抹茶の香りが濃く甘めです。個包装で配りやすいです。" } },
+      { role: "traveler", taste: 5, texture: 4.5, rebuy: true, feel: { sweet: 3, salty: 0, spicy: 0 }, bought: "2026-07",
+        text: { ko: "선물로 줬더니 반응이 아주 좋았어요.", en: "Gave them as gifts and everyone loved them.", ja: "お土産にしたらとても好評でした。" } },
+    ],
+    qa: [] },
+  { id: "jp-ramen-spicy", country: "jp", cat: "instant", price: { amount: 280, currency: "JPY" }, taste: { sweet: 0, salty: 4, spicy: 4 },
+    rating: 4.1, rebuy: 74, gift: 2, pop: 4, allergens: ["wheat", "soy"],
+    name: { ko: "매운 컵라면", en: "Spicy cup ramen", ja: "辛口カップラーメン" },
+    reviews: [
+      { role: "local", taste: 4, texture: 4, rebuy: true, feel: { sweet: 0, salty: 4, spicy: 5 }, bought: "2026-09",
+        text: { ko: "일본 컵라면 중에서는 꽤 매운 편이에요. 국물이 진해요.", en: "Quite spicy for a Japanese cup noodle. Rich broth.", ja: "日本のカップ麺の中ではかなり辛めです。スープが濃いです。" } },
+      { role: "traveler", taste: 3.5, texture: 4, rebuy: false, feel: { sweet: 0, salty: 5, spicy: 3 }, bought: "2026-08",
+        text: { ko: "짠 편이라 국물은 반만 마셨어요.", en: "Rather salty, I only drank half of the soup.", ja: "塩辛めなのでスープは半分だけ飲みました。" } },
+    ],
+    qa: [] },
+  { id: "jp-nori", country: "jp", cat: "snack", price: { amount: 320, currency: "JPY" }, taste: { sweet: 1, salty: 3, spicy: 0 },
+    rating: 4.1, rebuy: 70, gift: 4, pop: 3, allergens: ["soy", "sesame"],
+    name: { ko: "김 참깨 스낵", en: "Seaweed sesame snack", ja: "海苔ごまスナック" },
+    reviews: [
+      { role: "local", taste: 4, texture: 4, rebuy: true, feel: { sweet: 1, salty: 3, spicy: 0 }, bought: "2026-08",
+        text: { ko: "맥주 안주로도 좋고 가벼워서 선물하기 좋아요.", en: "Works as a beer snack and is light enough to give as a gift.", ja: "ビールのおつまみにもなり、軽いのでお土産にも向きます。" } },
+    ],
+    qa: [] },
+  { id: "kr-honey-almond", country: "kr", cat: "snack", price: { amount: 3500, currency: "KRW" }, taste: { sweet: 4, salty: 2, spicy: 0 },
+    rating: 4.4, rebuy: 85, gift: 5, pop: 5, allergens: ["nuts", "milk"],
+    name: { ko: "꿀 버터 아몬드", en: "Honey butter almonds", ja: "ハニーバターアーモンド" },
+    reviews: [
+      { role: "local", taste: 4.5, texture: 4.5, rebuy: true, feel: { sweet: 4, salty: 2, spicy: 0 }, bought: "2026-09",
+        text: { ko: "달고 짭짤해서 멈추기 어려워요. 외국인 친구들 선물로 자주 사요.", en: "Sweet and salty, hard to stop. I often buy it for foreign friends.", ja: "甘じょっぱくて止まりません。外国の友人へのお土産によく買います。" } },
+      { role: "traveler", taste: 4, texture: 4.5, rebuy: true, feel: { sweet: 5, salty: 1, spicy: 0 }, bought: "2026-09",
+        text: { ko: "단맛이 강해서 호불호는 있을 수 있어요.", en: "Quite sweet, so it may not be for everyone.", ja: "甘さが強いので好みは分かれるかもしれません。" } },
+    ],
+    qa: [{ q: { ko: "선물용으로 어떤 포장이 좋아요?", en: "Which pack is best for gifts?", ja: "お土産にはどのパッケージがいいですか？" },
+      a: { ko: "작은 봉지가 여러 개 든 묶음이 나눠 주기 좋아요.", en: "A multipack of small bags is easiest to share.", ja: "小袋がいくつか入ったセットが配りやすいです。" } }] },
+  { id: "kr-spicy-snack", country: "kr", cat: "snack", price: { amount: 1800, currency: "KRW" }, taste: { sweet: 1, salty: 3, spicy: 4 },
+    rating: 4.0, rebuy: 72, gift: 3, pop: 4, allergens: ["wheat"],
+    name: { ko: "매콤 떡볶이맛 과자", en: "Spicy rice-cake flavored snack", ja: "ピリ辛トッポッキ味スナック" },
+    reviews: [
+      { role: "local", taste: 4, texture: 4, rebuy: true, feel: { sweet: 1, salty: 3, spicy: 4 }, bought: "2026-08",
+        text: { ko: "맵지만 단맛이 살짝 있어서 계속 손이 가요.", en: "Spicy but with a hint of sweetness, so you keep reaching for more.", ja: "辛いけれどほんのり甘く、つい手が伸びます。" } },
+    ],
+    qa: [] },
+  { id: "kr-citron-tea", country: "kr", cat: "drink", price: { amount: 6500, currency: "KRW" }, taste: { sweet: 4, salty: 0, spicy: 0 },
+    rating: 4.5, rebuy: 86, gift: 5, pop: 4, allergens: [],
+    name: { ko: "유자차", en: "Citron tea", ja: "ゆず茶" },
+    reviews: [
+      { role: "local", taste: 4.5, texture: 4.5, rebuy: true, feel: { sweet: 4, salty: 0, spicy: 0 }, bought: "2026-09",
+        text: { ko: "뜨거운 물에 타 마시면 감기 기운에 좋아요. 병이라 가방에 넣을 때 조심해야 해요.", en: "Nice with hot water when you feel a cold coming. It's a glass jar, so pack it carefully.", ja: "お湯で溶かして飲むと風邪気味のときに良いです。瓶なので持ち運びは注意が必要です。" } },
+    ],
+    qa: [] },
+  { id: "kr-sweet-potato", country: "kr", cat: "snack", price: { amount: 2500, currency: "KRW" }, taste: { sweet: 3, salty: 1, spicy: 0 },
+    rating: 4.2, rebuy: 76, gift: 3, pop: 3, allergens: [],
+    name: { ko: "고구마 말랭이", en: "Dried sweet potato", ja: "干し芋" },
+    reviews: [
+      { role: "local", taste: 4, texture: 4, rebuy: true, feel: { sweet: 3, salty: 0, spicy: 0 }, bought: "2026-09",
+        text: { ko: "쫀득하고 자연스러운 단맛이라 부담이 없어요.", en: "Chewy with a natural sweetness, easy to eat.", ja: "もちもちで自然な甘さ、食べやすいです。" } },
+    ],
+    qa: [] },
+];
+
+export const FOOD_COUNTRIES = ["jp", "kr"];
+export const FOOD_CATS = ["snack", "sweet", "drink", "instant"];

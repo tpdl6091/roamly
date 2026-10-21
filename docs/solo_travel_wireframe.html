@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roamly 와이어프레임</title>
+<style>
+:root{--bg:#f4f4f2;--card:#fff;--line:#c9c9c4;--ink:#222;--sub:#777;--fill:#e6e6e2;--accent:#3b5bdb;--ok:#2f9e44}
+@media (prefers-color-scheme:dark){:root{--bg:#161616;--card:#222;--line:#444;--ink:#eee;--sub:#999;--fill:#333;--accent:#748ffc;--ok:#69db7c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 -apple-system,"Segoe UI","Malgun Gothic",sans-serif}
+.wrap{max-width:1280px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:22px;margin:0 0 4px}
+h2{font-size:17px;margin:40px 0 12px;padding-top:8px;border-top:1px solid var(--line)}
+.sub{color:var(--sub);margin:0 0 16px}
+.ia{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.ia div{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.ia b{display:block;margin-bottom:4px}
+.ia span{display:block;color:var(--sub);font-size:12px}
+.tag{display:inline-block;font-size:11px;border:1px solid var(--line);border-radius:10px;padding:0 7px;margin-left:4px;color:var(--sub)}
+.tag.p0{border-color:var(--ok);color:var(--ok)}
+.screens{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+.fig figcaption{font-weight:600;margin-bottom:4px}
+.fig .note{color:var(--sub);font-size:12px;margin:0 0 8px;min-height:36px}
+.phone{background:var(--card);border:2px solid var(--ink);border-radius:22px;padding:12px;min-height:560px;overflow:hidden;display:flex;flex-direction:column;gap:8px}
+.bar{display:flex;justify-content:space-between;align-items:center;font-size:12px}
+.box{background:var(--fill);border:1px dashed var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--sub);font-size:12px}
+.card{border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+.row{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);border-radius:14px;padding:1px 10px;font-size:12px}
+.chip.on{background:var(--ink);color:var(--card);border-color:var(--ink)}
+.btn{border:1px solid var(--ink);border-radius:8px;padding:6px 10px;text-align:center;font-size:13px}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.grow{flex:1}
+.nav{margin-top:auto;display:flex;justify-content:space-around;border-top:1px solid var(--line);padding-top:8px;font-size:12px}
+.badge{color:var(--ok);font-size:12px}
+.small{font-size:12px;color:var(--sub)}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.flow span.s{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:3px 9px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Roamly 웹서비스 와이어프레임</h1>
+<p class="sub">저해상도 흐름 검증용입니다. 서울·도쿄·오사카·베를린·뉴욕·바르셀로나, UI 6개 언어 기준. 모바일 우선, 데스크톱은 같은 구조를 확장합니다.</p>
+
+<h2>1. 정보 구조 (IA)</h2>
+<div class="ia">
+  <div><b>홈</b><span>도시 선택·요청</span><span>취향 맞춤 동네</span><span>이어서 보기(진행 중 여행)</span></div>
+  <div><b>탐색 <i class="tag p0">P0</i></b><span>도시 홈 → 동네 목록</span><span>동네 상세 → 장소 목록</span><span>장소 상세(현지인 코멘트·생활 팁)</span></div>
+  <div><b>내 여행 <i class="tag p0">P0</i></b><span>일정(날짜별·지도)</span><span>저장함</span><span>예산·준비물·기록 <i class="tag">P1</i></span></div>
+  <div><b>작성 <i class="tag p0">P0</i></b><span>장소 추천 / 생활 팁</span><span>실경험 인증·방문일</span></div>
+  <div><b>연결 <i class="tag">P2</i></b><span>호스트 프로필</span><span>로컬 프로그램·동행</span><span>신청·일정 조율</span></div>
+  <div><b>식품 <i class="tag">P2</i></b><span>제품 상세·리뷰</span><span>비교·Q&amp;A</span></div>
+  <div><b>설정</b><span>언어(6개)</span><span>취향 프로필</span><span>번역/원문 기본값</span></div>
+</div>
+
+<h2>2. 핵심 사용자 흐름 (P0 루프)</h2>
+<div class="flow">
+  <span class="s">언어·도시 선택</span>→<span class="s">취향 온보딩</span>→<span class="s">동네 목록</span>→<span class="s">장소 상세</span>→<span class="s">저장</span>→<span class="s">새 여행 만들기</span>→<span class="s">저장함에서 일정 배치</span>→<span class="s">여행 후 추천 작성</span>
+</div>
+
+<h2>3. 화면</h2>
+<div class="screens">
+
+<figure class="fig"><figcaption>S1. 홈 / 도시 선택</figcaption>
+<p class="note">론칭 도시 6곳 + 도시 요청. 언어는 우상단 상시 전환.</p>
+<div class="phone">
+  <div class="bar"><b>LOGO</b><span class="chip">한국어 ▾</span></div>
+  <div class="box" style="height:34px">🔍 도시 검색</div>
+  <div class="small">도시를 선택하세요</div>
+  <div class="row">
+    <div class="card grow">서울<br><span class="small">동네 18</span></div>
+    <div class="card grow">도쿄<br><span class="small">동네 22</span></div>
+  </div>
+  <div class="row">
+    <div class="card grow">오사카</div><div class="card grow">베를린</div>
+  </div>
+  <div class="row">
+    <div class="card grow">뉴욕</div><div class="card grow">바르셀로나</div>
+  </div>
+  <div class="card" style="border-style:dashed">원하는 도시가 없나요?<br><span class="small">요청 38명 / 오픈 기준 50명</span><div class="btn" style="margin-top:6px">도시 요청하기</div></div>
+  <div class="nav"><span>홈</span><span>탐색</span><span>내 여행</span><span>작성</span><span>MY</span></div>
+</div></figure>
+
+<figure class="fig"><figcaption>S2. 취향 온보딩</figcaption>
+<p class="note">3~5문항. 건너뛰기 가능. 결과는 동네 추천 정렬에 사용.</p>
+<div class="phone">
+  <div class="bar"><span>← </span><span class="small">2 / 4</span></div>
+  <b>어떤 동네가 끌리세요?</b>
+  <div class="row"><span class="chip on">조용한 골목</span><span class="chip">카페</span><span class="chip on">독립 서점</span><span class="chip">디자인 숍</span><span class="chip">자연·공원</span><span class="chip">시장·마켓</span><span class="chip">야경</span></div>
+  <div class="small" style="margin-top:8px">여행 스타일</div>
+  <div class="row"><span class="chip">느긋하게</span><span class="chip on">많이 걷기</span><span class="chip">맛집 위주</span></div>
+  <div class="small" style="margin-top:8px">혼자일 때 불편한 점 (선택)</div>
+  <div class="row"><span class="chip on">혼밥</span><span class="chip">안전</span><span class="chip">길 찾기</span><span class="chip">언어</span></div>
+  <div class="grow"></div>
+  <div class="btn pri">다음</div><div class="small" style="text-align:center">건너뛰기</div>
+</div></figure>
+
+<figure class="fig"><figcaption>S3. 동네 목록 (도시 홈)</figcaption>
+<p class="note">동네 카드가 탐색 단위. 취향 필터와 정렬.</p>
+<div class="phone">
+  <div class="bar"><span>← 도쿄</span><span class="chip">日本語 ▾</span></div>
+  <div class="row"><span class="chip on">내 취향순</span><span class="chip">카페</span><span class="chip">조용한 골목</span><span class="chip">서점</span></div>
+  <div class="card"><div class="box" style="height:80px">동네 사진</div><b>시모키타자와</b> <span class="small">조용함 · 서점 · 빈티지</span><br><span class="small">현지인 추천 24곳 · 내 취향 92%</span></div>
+  <div class="card"><div class="box" style="height:80px">동네 사진</div><b>구라마에</b> <span class="small">디자인 숍 · 카페</span><br><span class="small">현지인 추천 17곳 · 내 취향 85%</span></div>
+  <div class="card"><b>야나카</b> <span class="small">옛 골목 · 시장</span></div>
+  <div class="nav"><span>홈</span><span>탐색</span><span>내 여행</span><span>작성</span><span>MY</span></div>
+</div></figure>
+
+<figure class="fig"><figcaption>S4. 장소 상세</figcaption>
+<p class="note">현지인 코멘트·생활 팁·신뢰 배지가 한 화면. 번역본/원문 전환.</p>
+<div class="phone">
+  <div class="bar"><span>← 시모키타 · 서점</span><span class="chip">번역됨 · 원문 보기</span></div>
+  <div class="box" style="height:90px">사진</div>
+  <b>B&amp;B 북스토어 (예시)</b>
+  <div class="row"><span class="chip">독립 서점</span><span class="chip">혼자 가기 좋음</span></div>
+  <div class="card">"주말 오후는 붐벼요. 평일 오후 3시가 좋아요."<br><span class="small">— 현지인 · 도쿄 거주 6년</span><br><span class="badge">✓ 실경험 · 방문 2026.08 · 작성 2026.09</span></div>
+  <div class="card"><b class="small">생활 팁</b><br><span class="small">운영: 월 휴무 · 결제: 카드/IC · 추천: 평일 오후 · 사진: 일부 제한</span></div>
+  <div class="row"><div class="btn grow">♡ 저장</div><div class="btn pri grow">일정에 추가</div></div>
+  <div class="small" style="text-align:center">광고·협찬 의심 신고</div>
+</div></figure>
+
+<figure class="fig"><figcaption>S5. 내 여행 / 일정</figcaption>
+<p class="note">저장함에서 끌어 배치. 빈 시간은 추후 즉흥 추천(P1) 자리.</p>
+<div class="phone">
+  <div class="bar"><b>도쿄 3박 4일</b><span class="small">9/12–9/15</span></div>
+  <div class="row"><span class="chip on">일정</span><span class="chip">저장함 7</span><span class="chip" style="opacity:.5">예산</span><span class="chip" style="opacity:.5">준비물</span></div>
+  <div class="row"><span class="chip on">Day 1</span><span class="chip">Day 2</span><span class="chip">Day 3</span><span class="chip">Day 4</span></div>
+  <div class="box" style="height:90px">지도 + 동선</div>
+  <div class="card">① 10:00 B&amp;B 북스토어 <span class="small">⠿</span></div>
+  <div class="card">② 12:30 카페 (도보 8분) <span class="small">⠿</span></div>
+  <div class="card" style="border-style:dashed">빈 시간 14:00–17:00<br><span class="small">지금 뭐 하지? (P1)</span></div>
+  <div class="card">③ 18:00 저녁 식당 <span class="small">⠿</span></div>
+  <div class="btn">+ 장소 추가</div>
+</div></figure>
+
+<figure class="fig"><figcaption>S6. 추천 작성</figcaption>
+<p class="note">장소 추천·생활 팁 한 화면. 실경험 인증이 작성의 일부.</p>
+<div class="phone">
+  <div class="bar"><span>← 작성</span><span class="small">초안 저장됨</span></div>
+  <div class="row"><span class="chip on">장소 추천</span><span class="chip">생활 팁</span></div>
+  <div class="box" style="height:34px">장소 검색·선택</div>
+  <div class="box" style="height:90px">내 코멘트 (내 언어로 작성)</div>
+  <div class="small">생활 팁 (선택)</div>
+  <div class="row"><span class="chip">운영 요일</span><span class="chip">결제 방법</span><span class="chip">추천 메뉴</span><span class="chip">좋은 시간</span></div>
+  <div class="card"><b class="small">신뢰 정보</b><br><span class="small">방문일 [ 2026-09-13 ]<br>실경험 인증: ☐ 위치 ☐ 사진 ☐ 영수증<br>☐ 협찬·광고 포함</span></div>
+  <div class="grow"></div>
+  <div class="btn pri">게시</div>
+</div></figure>
+
+</div>
+
+<h2>3-2. P1 화면 (내 여행 확장)</h2>
+<div class="screens">
+
+<figure class="fig"><figcaption>S7. 예산 <i class="tag">P1</i></figcaption>
+<p class="note">목표 대비 지출을 카테고리별로. 현지 통화 입력 → 기본 통화 환산.</p>
+<div class="phone">
+  <div class="bar"><b>도쿄 3박 4일</b><span class="chip">KRW ▾</span></div>
+  <div class="row"><span class="chip">일정</span><span class="chip">저장함</span><span class="chip on">예산</span><span class="chip">준비물</span><span class="chip">기록</span></div>
+  <div class="card"><span class="small">총 예산 800,000원</span><br><b>지출 342,000원</b> <span class="small">남음 458,000원</span>
+    <div class="box" style="height:10px;margin-top:6px;justify-content:flex-start"><div style="width:43%;height:100%;background:var(--accent);border-radius:8px"></div></div></div>
+  <div class="card">교통 <span class="small">45,000 / 80,000</span></div>
+  <div class="card">숙박 <span class="small">180,000 / 300,000</span></div>
+  <div class="card">식비 <span class="small">92,000 / 250,000</span></div>
+  <div class="card">쇼핑·기타 <span class="small">25,000 / 170,000</span></div>
+  <div class="small">최근 지출</div>
+  <div class="card">라멘 · 1,100엔 (≈10,400원) <span class="small">식비 · 오늘</span></div>
+  <div class="btn pri" style="margin-top:auto">+ 지출 추가</div>
+</div></figure>
+
+<figure class="fig"><figcaption>S8. 지출 추가 <i class="tag">P1</i></figcaption>
+<p class="note">현장에서 5초 안에 입력. 일정의 장소와 연결 선택.</p>
+<div class="phone">
+  <div class="bar"><span>✕</span><b>지출 추가</b><span></span></div>
+  <div class="box" style="height:56px;font-size:20px;color:var(--ink)">1,100 JPY</div>
+  <div class="small" style="text-align:center">≈ 10,400 KRW (환율 입력 가능)</div>
+  <div class="row"><span class="chip">교통</span><span class="chip">숙박</span><span class="chip on">식비</span><span class="chip">쇼핑</span><span class="chip">기타</span></div>
+  <div class="card"><span class="small">장소 연결 (선택)</span><br>이치란 라멘 시부야</div>
+  <div class="card"><span class="small">메모 (선택)</span><br>혼밥 카운터석</div>
+  <div class="card"><span class="small">날짜</span> 오늘 9/13</div>
+  <div class="btn pri" style="margin-top:auto">저장</div>
+</div></figure>
+
+<figure class="fig"><figcaption>S9. 준비물·할 일 <i class="tag">P1</i></figcaption>
+<p class="note">도시·기간에 맞춘 템플릿에서 시작. 출발 전/현지 구분.</p>
+<div class="phone">
+  <div class="bar"><b>도쿄 3박 4일</b><span class="small">8 / 15 완료</span></div>
+  <div class="row"><span class="chip">일정</span><span class="chip">저장함</span><span class="chip">예산</span><span class="chip on">준비물</span><span class="chip">기록</span></div>
+  <div class="row"><span class="chip on">출발 전</span><span class="chip">짐</span><span class="chip">현지</span></div>
+  <div class="card">☑ 여권 유효기간 확인</div>
+  <div class="card">☑ eSIM / 로밍</div>
+  <div class="card">☐ 숙소 체크인 시간 확인 <span class="small">D-3</span></div>
+  <div class="card">☐ 교통 IC카드 준비 <span class="small">도시 팁</span></div>
+  <div class="card">☐ 어댑터(변환 플러그)</div>
+  <div class="card" style="border-style:dashed">저장한 식품 3개 → 쇼핑 리스트로 <span class="small">(P2 연동)</span></div>
+  <div class="row" style="margin-top:auto"><div class="btn grow">+ 항목 추가</div><div class="btn grow">템플릿 불러오기</div></div>
+</div></figure>
+
+<figure class="fig"><figcaption>S10. 지금 뭐 하지? (즉흥 추천) <i class="tag">P1</i></figcaption>
+<p class="note">남은 시간·날씨·기분을 입력 → 근처 장소 3~5개. 일정 빈 시간에서 진입.</p>
+<div class="phone">
+  <div class="bar"><span>←</span><b>지금 뭐 하지?</b><span></span></div>
+  <div class="card"><span class="small">현재 위치</span> 시모키타자와<br><span class="small">☀ 맑음 24° · 오후 2:10</span></div>
+  <div class="small">남은 시간</div>
+  <div class="row"><span class="chip">1시간</span><span class="chip on">2~3시간</span><span class="chip">반나절</span></div>
+  <div class="small">기분</div>
+  <div class="row"><span class="chip on">조용히</span><span class="chip">활동적</span><span class="chip">배고픔</span><span class="chip">구경</span></div>
+  <div class="card"><b>① 하라 공원 산책</b> <span class="small">도보 6분 · 맑은 날 추천</span><div class="row" style="margin-top:4px"><span class="chip">일정에 추가</span><span class="chip">저장</span></div></div>
+  <div class="card"><b>② 골목 카페 (혼자 가기 좋음)</b> <span class="small">도보 3분</span></div>
+  <div class="card"><b>③ 중고 레코드 숍</b> <span class="small">도보 9분</span></div>
+  <div class="small" style="text-align:center;margin-top:auto">비 오는 날에는 실내 장소 위주로 추천됩니다</div>
+</div></figure>
+
+<figure class="fig"><figcaption>S11. 여행 기록 (도시별) <i class="tag">P1</i></figcaption>
+<p class="note">여행이 끝나면 일정이 기록으로 전환. 도시별 아카이브.</p>
+<div class="phone">
+  <div class="bar"><b>내 기록</b><span class="chip">도시별 ▾</span></div>
+  <div class="card"><div class="row"><div class="box" style="width:60px;height:60px">사진</div><div><b>도쿄</b><br><span class="small">3회 · 장소 27곳 · 사진 142장</span></div></div></div>
+  <div class="card"><div class="row"><div class="box" style="width:60px;height:60px">사진</div><div><b>오사카</b><br><span class="small">1회 · 장소 11곳</span></div></div></div>
+  <div class="small">최근 여행 · 도쿄 2026.09</div>
+  <div class="card">Day 1 · B&amp;B 북스토어<br><div class="box" style="height:50px;margin:4px 0">사진</div><span class="small">메모: 평일 오후라 한산했다</span></div>
+  <div class="card" style="border-style:dashed">이 장소를 다녀오셨네요.<br><span class="small">추천·팁을 남기면 실경험 배지가 붙어요</span><div class="btn" style="margin-top:4px">추천 작성하기</div></div>
+  <div class="nav"><span>홈</span><span>탐색</span><span>내 여행</span><span>작성</span><span>MY</span></div>
+</div></figure>
+
+</div>
+
+<h2>3-3. P2 화면 (현지인 연결·식품)</h2>
+<div class="screens">
+
+<figure class="fig"><figcaption>S12. 호스트 프로필 <i class="tag">P2</i></figcaption>
+<p class="note">관심사·언어·소개 지역·활동·후기를 보고 선택. 신원 확인 상태를 상단에 표시.</p>
+<div class="phone">
+  <div class="bar"><span>← 호스트</span><span class="chip">번역됨</span></div>
+  <div class="row"><div class="box" style="width:64px;height:64px;border-radius:50%">사진</div><div><b>유키</b> <span class="badge">✓ 신원 확인</span><br><span class="small">도쿄 거주 6년 · 시모키타</span><br><span class="small">★ 4.9 · 후기 31</span></div></div>
+  <div class="row"><span class="chip">日本語</span><span class="chip">English</span><span class="chip">한국어 초급</span></div>
+  <div class="row"><span class="chip">독립 서점</span><span class="chip">빈티지</span><span class="chip">카페</span></div>
+  <div class="card"><b class="small">소개</b><br><span class="small">"조용한 골목을 천천히 걷는 걸 좋아해요. 혼자 오신 분도 편하게…"</span></div>
+  <div class="card"><b class="small">진행 프로그램</b><br>시모키타 골목 산책 · 2시간 <span class="small">무료 (실비 분담)</span><br>동네 카페 탐방 · 2시간</div>
+  <div class="card"><b class="small">작성한 추천 24곳</b> <span class="small">실경험 배지 24</span></div>
+  <div class="row" style="margin-top:auto"><div class="btn grow">문의</div><div class="btn pri grow">프로그램 보기</div></div>
+</div></figure>
+
+<figure class="fig"><figcaption>S13. 로컬 프로그램 상세 <i class="tag">P2</i></figcaption>
+<p class="note">산책·맛집/마켓 탐방·동행은 같은 "프로그램" 객체의 유형 태그. 비용은 정원·실비 기준으로 투명하게.</p>
+<div class="phone">
+  <div class="bar"><span>← 프로그램</span><span class="chip">♡</span></div>
+  <div class="row"><span class="chip on">동네 산책</span><span class="chip">소규모 4명</span></div>
+  <b>시모키타 골목 산책</b>
+  <div class="box" style="height:80px">사진</div>
+  <div class="card"><span class="small">일시</span> 9/14 (토) 15:00–17:00<br><span class="small">만나는 곳</span> 시모키타 남쪽 출구 (공공장소)<br><span class="small">언어</span> 日本語 · English<br><span class="small">비용</span> 무료 · 카페 음료 실비 개인 부담</div>
+  <div class="card"><b class="small">코스</b><br><span class="small">① 골목 서점 ② 빈티지 숍 ③ 공원 벤치 ④ 로컬 카페</span></div>
+  <div class="card"><span class="small">잔여 2자리 · 혼자 오신 분 3명 신청</span></div>
+  <div class="small" style="text-align:center">안전 안내 · 신고하기</div>
+  <div class="btn pri" style="margin-top:auto">참여 신청</div>
+</div></figure>
+
+<figure class="fig"><figcaption>S14. 신청·일정 조율 <i class="tag">P2</i></figcaption>
+<p class="note">신청 → 호스트 수락 → 일정 확정 → 내 일정에 자동 반영. 메시지는 번역 지원.</p>
+<div class="phone">
+  <div class="bar"><span>← 신청 내역</span><span></span></div>
+  <div class="card"><b>시모키타 골목 산책</b><br><span class="small">9/14 15:00 · 호스트 유키</span>
+    <div class="flow" style="margin-top:6px"><span class="s">신청</span>→<span class="s" style="border-color:var(--accent)">수락 대기</span>→<span class="s">확정</span></div></div>
+  <div class="card"><span class="small">호스트에게 한마디</span><br>혼자 여행 중이고 서점을 좋아해요!</div>
+  <div class="card"><b class="small">채팅 (자동 번역)</b><br><span class="small">호스트: 15시에 출구에서 만나요 →<br>"Let's meet at 3pm at the exit"<br>원문 보기</span></div>
+  <div class="card" style="border-style:dashed"><span class="small">확정되면 내 일정 Day 2 15:00에 자동 추가됩니다</span></div>
+  <div class="small">개인 연락처는 확정 전까지 공개되지 않습니다</div>
+  <div class="row" style="margin-top:auto"><div class="btn grow">신청 취소</div><div class="btn grow">메시지</div></div>
+</div></figure>
+
+<figure class="fig"><figcaption>S15. 식품 상세·현지 리뷰 <i class="tag">P2</i></figcaption>
+<p class="note">현지인 리뷰는 맛·식감·재구매 의향을 구조화. 취향 비슷한 이용자 리뷰 우선 노출.</p>
+<div class="phone">
+  <div class="bar"><span>← 식품</span><span class="chip">♡ 저장</span></div>
+  <div class="row"><div class="box" style="width:80px;height:80px">제품 사진</div><div><b>얇은 감자칩 (예시)</b><br><span class="small">스낵 · 약 200엔</span><br><span class="small">선물 적합도 ★★★★</span></div></div>
+  <div class="card"><b class="small">현지인 평가 (리뷰 48)</b><br><span class="small">맛 4.3 · 식감 4.5 · 재구매 의향 82%</span><br>짠맛 ▮▮▮▯▯ · 매운맛 ▮▯▯▯▯ · 단맛 ▮▮▯▯▯</div>
+  <div class="row"><span class="chip on">내 취향순</span><span class="chip">최신순</span><span class="chip">현지인만</span></div>
+  <div class="card">"짠맛 약해서 아이도 잘 먹어요" <span class="small">· 현지인</span><br><span class="badge">✓ 구매 확인 · 2026.08</span> <span class="small">나와 취향 유사</span></div>
+  <div class="card"><b class="small">성분·먹는 방법</b> <span class="small">알레르기: 대두 · 원재료 보기 ▾</span></div>
+  <div class="row" style="margin-top:auto"><div class="btn grow">비교에 담기</div><div class="btn pri grow">현지인에게 질문</div></div>
+</div></figure>
+
+<figure class="fig"><figcaption>S16. 식품 비교·질문 <i class="tag">P2</i></figcaption>
+<p class="note">가격·맛·인기·선물 적합도를 나란히. 질문은 현지 사용자에게 알림.</p>
+<div class="phone">
+  <div class="bar"><span>← 비교 (3)</span><span class="chip">선물용 ▾</span></div>
+  <div class="card"><div class="row" style="justify-content:space-between"><b>감자칩</b><b>말차 쿠키</b><b>김 스낵</b></div>
+    <div class="row" style="justify-content:space-between;margin-top:6px"><span class="small">가격</span><span class="small">200엔</span><span class="small">450엔</span><span class="small">320엔</span></div>
+    <div class="row" style="justify-content:space-between"><span class="small">맛</span><span class="small">4.3</span><span class="small">4.6</span><span class="small">4.1</span></div>
+    <div class="row" style="justify-content:space-between"><span class="small">인기</span><span class="small">상</span><span class="small">상</span><span class="small">중</span></div>
+    <div class="row" style="justify-content:space-between"><span class="small">선물</span><span class="small">중</span><span class="small">상</span><span class="small">상</span></div></div>
+  <div class="small">Q&amp;A</div>
+  <div class="card"><b>Q.</b> 한국에 반입 가능한가요?<br><span class="small">답변 2 · 현지인 답변 ✓</span></div>
+  <div class="card"><b>Q.</b> 어느 마트에서 가장 싸요?<br><span class="small">답변 대기 · 현지 사용자에게 알림 발송됨</span></div>
+  <div class="card" style="border-style:dashed"><span class="small">사진으로 찾기 (P3) · 제품 사진을 올리면 제품을 찾아줘요</span></div>
+  <div class="btn pri" style="margin-top:auto">질문 작성</div>
+</div></figure>
+
+</div>
+
+<h2>4. 다음 확인 사항</h2>
+<ul>
+  <li>실경험 인증을 위치·사진·영수증 중 무엇으로 할지 (개인정보·구현 난이도 비교 필요)</li>
+  <li>취향 온보딩 질문 최종 문항과 동네 태그 체계</li>
+  <li>6개 언어 UI에서 문구 길이 차이(독일어 등)에 따른 레이아웃 확인</li>
+  <li>예산: 다중 통화 환산 방식(자동 환율 vs 수동 입력)과 환율 기준일 표시</li>
+  <li>즉흥 추천: 위치·날씨 권한 거부 시 대체 흐름(수동 지역 선택)</li>
+  <li>여행 기록: 사진 저장 용량·공개 범위(비공개 기본)와 "추천 작성" 전환 동선</li>
+  <li>호스트: 신원 확인 방식(신분증·SNS·영상)과 국가별 유상 안내 규제 검토 전까지 프로그램은 무료·실비 분담으로 표기</li>
+  <li>프로그램: 연락처 비공개 정책, 안전 안내 문구, 취소·노쇼 규칙</li>
+  <li>식품: 제품 DB 확보 방법과 "구매 확인" 인증 방식, 국가별 반입 가능 여부 안내 책임 범위</li>
+</ul>
+</div>
+</body>
+</html>

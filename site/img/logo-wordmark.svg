@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -6 324 92" role="img" aria-label="Roamly">
+  <g fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <g stroke="#1d5c6b">
+      <g transform="translate(4 0)"><path d="M0 0V60M0 0H16C30 0 36 8 36 18C36 28 30 36 16 36H0M17 36L38 60"/></g>
+      <g transform="translate(118 0)"><circle cx="20" cy="40" r="20"/><path d="M40 20V60"/></g>
+      <g transform="translate(176 0)"><path d="M0 20V60M0 38C0 27 7 20 16 20S30 27 30 38V60M30 38C30 27 37 20 46 20S60 27 60 38V60"/></g>
+      <g transform="translate(254 0)"><path d="M0 0V60"/></g>
+      <g transform="translate(272 0)"><path d="M0 20L22.6 58M40 20L19 66Q14 76 4 75"/></g>
+    </g>
+    <g stroke="#4a9fb0"><g transform="translate(60 0)"><circle cx="20" cy="40" r="20"/></g></g>
+  </g>
+</svg>
